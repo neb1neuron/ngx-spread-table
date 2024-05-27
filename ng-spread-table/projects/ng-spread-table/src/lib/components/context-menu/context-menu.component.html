@@ -1,0 +1,21 @@
+<div class="context-menu">
+  @for (menuItem of contextMenuItems;let i=$index; track i) {
+  <ng-container>
+    @if(menuItem.menuText !== 'separator'){
+    <div class="menu-link"
+         [ngClass]="menuItem.disabled?'disabled':'enabled hover-icon-pop'"
+         (click)="onContextMenuClick($event, menuItem)">
+      @if(menuItem.iconHtml){
+      <span [innerHtml]="menuItem.iconHtml | bypassHtmlSanitizer"></span>&nbsp;
+      }
+      {{ menuItem.menuText }}
+      @if(menuItem?.shortcut){
+      <span class="shortcut">{{menuItem?.shortcut}}</span>
+      }
+    </div>
+    } @else{
+    <div class="separator"></div>
+    }
+  </ng-container>
+  }
+</div>

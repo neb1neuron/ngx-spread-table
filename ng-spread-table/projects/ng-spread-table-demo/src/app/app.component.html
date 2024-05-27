@@ -1,0 +1,36 @@
+<!-- <h1>ng-spread-table Demo</h1>
+<div class="p-3 w-100"
+     style="height: 700px;">
+  @if(this.data){
+  <spread-table #spreadTable
+                [columns]="columns"
+                [minColumnWidth]="100"
+                [rowHeight]="36"
+                [indexWidth]="60"
+                [rawData]="data"
+                [undoRedoStackSize]="20"
+                [extraContextMenuItems]="extraContextMenuItems"
+                [extraColumnMenuItems]="extraColumnMenuItems"
+                (cellValueChange)="onCellValueChange($event)"
+                (contextMenuEvent)="onContextMenuEvent($event)"
+                (columnMenuEvent)="onColumnMenuEvent($event)">
+  </spread-table>
+  }
+</div> -->
+
+<div>
+  <button class="menu-button"
+          [ngClass]="{'selected-page': this.selectedPage === 'demo'}"
+          (click)="setPage(pages.demo)">Demo</button>
+  <button class="menu-button"
+          [ngClass]="{'selected-page': this.selectedPage === 'docs'}"
+          (click)="setPage(pages.docs)">Documentation</button>
+</div>
+<div class="page-wrapper">
+  @if(selectedPage===pages.demo){
+  <app-demo></app-demo>
+  }
+  @if(selectedPage===pages.docs){
+  <app-documentation></app-documentation>
+  }
+</div>

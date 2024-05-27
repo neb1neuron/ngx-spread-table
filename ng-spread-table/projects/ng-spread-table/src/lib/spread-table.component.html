@@ -1,0 +1,132 @@
+<div #spreadWrapper
+     class="wrapper"
+     [formGroup]="form">
+     <div id="widthReference"></div>
+
+     <div id="spread-table-header"
+          tabindex="-1"
+          class="">
+          <div class="spread-thead w-100"
+               [style.background]="headerBgColor"
+               [style.color]="headerColor"
+               (mousedown)="isDisplayContextMenu = false;isDisplayColumnMenu = false;">
+               <div class="columnHeader"
+                    [style.flex-grow]="0"
+                    [style.width]="indexWidth + 'px'">
+                    <div class=""
+                         style="color:inherit">Index</div>
+               </div>
+               @for (column of columns; track $index) {
+               <ng-container>
+                    <div class="columnHeader"
+                         [style.width]="(column.minWidth || minColumnWidth) + 'px'">
+                         <div [id]="column.name"
+                              class="column-name hideextra"
+                              (mouseenter)="showTooltip(column)">{{column.displayName}}</div>
+                         <div class="column-menu"
+                              (mousedown)="openColumnMenu($event, column)"
+                              (contextmenu)="$event.stopPropagation();$event.preventDefault();">
+                              <svg xmlns="http://www.w3.org/2000/svg"
+                                   [attr.width]="menuIconSize"
+                                   [attr.height]="menuIconSize"
+                                   viewBox="0 0 24 24"
+                                   fill="none">
+                                   <path d="M4 18L20 18"
+                                         [attr.stroke]=headerColor
+                                         stroke-width="2"
+                                         stroke-linecap="round" />
+                                   <path d="M4 12L20 12"
+                                         [attr.stroke]=headerColor
+                                         stroke-width="2"
+                                         stroke-linecap="round" />
+                                   <path d="M4 6L20 6"
+                                         [attr.stroke]=headerColor
+                                         stroke-width="2"
+                                         stroke-linecap="round" />
+                              </svg>
+                         </div>
+                         @if(column.resizable){
+                         <div class="column-sizer"
+                              [style.border-right]="'2px solid ' + headerColor"
+                              (mousedown)="clickResizer($event, column)"
+                              (dblclick)="resetColumnWidths();"></div>
+                         }
+                    </div>
+               </ng-container>
+               }
+               <div class="columnHeader">
+               </div>
+          </div>
+     </div>
+
+     <cdk-virtual-scroll-viewport [itemSize]="rowHeight">
+
+          @if(data.length){
+          <div #spreadTable
+               tabindex="-1"
+               class="spread-table"
+               contenteditable="true"
+               id="spreadTable">
+               <div contenteditable="false"
+                    class="spread-tbody">
+                    <div class="spread-row"
+                         *cdkVirtualFor="let row of data;let i = index">
+                         <div class="spread-cell not-editable"
+                              [style.height]="rowHeight+'px'"
+                              [style.width]="indexWidth + 'px'"
+                              [style.flex-grow]="0"
+                              [ngClass]="selectedRowIndex === row.rowIndex  ? 'selected' : ''"
+                              (click)="selectRow(row)"><span>{{row.rowIndex}}</span></div>
+
+
+                         @for (column of columns;let j = $index; track j) {
+                         <div #spreadCell
+                              class="spread-cell"
+                              [style.height]="rowHeight+'px'"
+                              [style.width]="column.minWidth + 'px'"
+                              (contextmenu)="openContextMenu($event,row.cells[j]);"
+                              (dblclick)="column.editable ? doubleClick(row.cells[j]) : ''"
+                              (mousedown)="cellClick($event,row.cells[j])"
+                              (mouseover)="mouseOverCall(row.cells[j])"
+                              [ngClass]="[isInEditMode(row.cells[j]) ? 'no-padding':'',
+                           row.cells[j]?.selected  ? 'selected' : '',
+                           row.cells[j]?.errors  ? 'has-errors' : '',
+                           row.cells[j]?.value !==  row.cells[j]?.originalValue ? 'hasChanges' : '',
+                           column.editable ? '' : 'not-editable']">
+                              <div style="height: 100%;"
+                                   class="error spread-table-tooltip">
+                                   @if(!isInEditMode(row.cells[j])){
+                                   <app-renderer style="height: 100%"
+                                                 [style.width]="column.minWidth! - 16 + 'px'"
+                                                 [rendererParams]="{rendererComponent:column.rendererComponent ,value: getCellValue(row,column.name), column:column }">
+                                   </app-renderer>
+                                   } @else {
+                                   <app-editor style="height: 100%"
+                                               [editorParams]="{editorComponent:column.editorComponent ,value: this.form.value[column.name], column:column}"
+                                               (setValue)="setCellValue(row,columns[j],$event)">
+                                   </app-editor>
+                                   }
+
+                                   @if(row.cells[j].errors){
+                                   <span class="validation-errors spread-table-tooltiptext spread-table-tooltip-bottom"
+                                         [innerHtml]="row.cells[j].errors"></span>
+                                   }
+                              </div>
+                         </div>
+                         }
+                    </div>
+               </div>
+          </div>
+          }
+     </cdk-virtual-scroll-viewport>
+</div>
+@if(contextMenuItems.length > 0 && isDisplayContextMenu){
+<app-context-menu #contextMenu
+                  [contextMenuItems]="contextMenuItems"
+                  (onContextMenuItemClick)="handleMenuItemClick($event)"></app-context-menu>
+}
+@if(columnMenuItems.length > 0 && isDisplayColumnMenu){
+<app-context-menu #columnMenu
+                  [contextMenuItems]="columnMenuItems"
+                  (onContextMenuItemClick)="handleColumnMenuItemClick($event)"></app-context-menu>
+}

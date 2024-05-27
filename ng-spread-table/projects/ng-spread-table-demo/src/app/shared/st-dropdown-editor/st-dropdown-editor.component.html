@@ -1,0 +1,10 @@
+<select style="width: 100%;height:100%;"
+        autofocus
+        [formControl]="params?.input"
+        (change)="select($event)"
+        class="form-control">
+        @for (item of params?.column?.editorParams?.items; track $index) {
+        <option [style.background]="item == params?.input.value ? '#dbf2ff' : ''"
+                [value]="item">{{item}}</option>
+        }
+</select>
