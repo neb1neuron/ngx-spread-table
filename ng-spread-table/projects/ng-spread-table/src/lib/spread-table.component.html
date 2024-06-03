@@ -48,6 +48,7 @@
                          @if(column.resizable){
                          <div class="column-sizer"
                               [style.border-right]="'2px solid ' + headerColor"
+                              [style.background:hover]="'headerColor'"
                               (mousedown)="clickResizer($event, column)"
                               (dblclick)="resetColumnWidths();"></div>
                          }
@@ -107,9 +108,9 @@
                                    </app-editor>
                                    }
 
-                                   @if(row.cells[j].errors){
+                                   @if(row.cells[j]?.errors){
                                    <span class="validation-errors spread-table-tooltiptext spread-table-tooltip-bottom"
-                                         [innerHtml]="row.cells[j].errors"></span>
+                                         [innerHtml]="row.cells[j]?.errors"></span>
                                    }
                               </div>
                          </div>

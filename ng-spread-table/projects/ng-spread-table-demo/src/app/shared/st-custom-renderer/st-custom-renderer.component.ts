@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IRendererComponent, IRendererParams } from '../../../../../ng-spread-table/src/public-api';
+import { IRendererComponent, IRendererParams } from 'ngx-spread-table';
+// import { IRendererComponent, IRendererParams } from '../../../../../ng-spread-table/src/public-api';
 
 @Component({
   selector: 'app-st-custom-renderer',

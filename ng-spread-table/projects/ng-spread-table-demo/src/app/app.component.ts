@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomModalComponent } from './shared/custom-modal/custom-modal.component';
 import { firstValueFrom, lastValueFrom } from 'rxjs';
-import { SpreadTableComponent } from 'ng-spread-table';
+import { SpreadTableComponent } from 'ngx-spread-table';
 import { CommonModule } from '@angular/common';
 // import { UndoRedoService } from '../../../ng-spread-table/src/lib/services/undo-redo.service';
 // import { SpreadTableComponent } from '../../../ng-spread-table/src/lib/spread-table.component';

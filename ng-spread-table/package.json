@@ -22,8 +22,8 @@
     "@types/highlight.js": "^10.1.0",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
-    "ng-spread-table": "^7.0.1",
     "ngx-highlightjs": "^11.0.0",
+    "ngx-spread-table": "^7.0.9",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

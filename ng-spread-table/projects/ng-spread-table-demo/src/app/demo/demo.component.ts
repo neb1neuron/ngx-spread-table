@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ViewChild, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { firstValueFrom, lastValueFrom } from 'rxjs';
-import { Cell, Change, Column, ContextMenuModel, Row, SpreadTableComponent, UndoRedoService } from 'ng-spread-table';
+import { Cell, Change, Column, ContextMenuModel, Row, SpreadTableComponent, UndoRedoService } from 'ngx-spread-table';
 // import { UndoRedoService } from '../../../../ng-spread-table/src/lib/services/undo-redo.service';
 // import { SpreadTableComponent } from '../../../../ng-spread-table/src/lib/spread-table.component';
 // import { Cell, Column, Row } from '../../../../ng-spread-table/src/lib/models/cell.model';
@@ -48,8 +48,15 @@ export class DemoComponent {
 
   gridInstance: SpreadTableComponent = new SpreadTableComponent(new UndoRedoService());
 
-  @ViewChild('spreadTable') set grid(gridInstance: SpreadTableComponent) {
-    this.gridInstance = gridInstance;
+  // @ViewChild('spreadTable') set grid(gridInstance: SpreadTableComponent) {
+  //   this.gridInstance = gridInstance;
+  // }
+
+  @ViewChild('spreadTable')
+  set grid(instance: SpreadTableComponent) {
+    setTimeout(() => {
+      this.gridInstance = instance;
+    }, 0);
   }
 
   extraContextMenuItems: ContextMenuModel[] =

@@ -1,7 +1,8 @@
 import { Component, EventEmitter } from '@angular/core';
-import { IEditorComponent, IEditorParams } from '../../../../../ng-spread-table/src/public-api';
+// import { IEditorComponent, IEditorParams } from '../../../../../ng-spread-table/src/public-api';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { IEditorComponent, IEditorParams } from 'ngx-spread-table';
 
 @Component({
   selector: 'app-st-dropdown-editor',

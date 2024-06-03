@@ -1,4 +1,4 @@
-# SpreadTable - Angular spreadsheet table
+# ngx-spread-table - Angular spreadsheet table
 
 ## How it looks
 

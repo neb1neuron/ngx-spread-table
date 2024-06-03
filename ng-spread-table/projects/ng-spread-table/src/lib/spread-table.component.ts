@@ -4,9 +4,11 @@ import { Cell, Column, Row } from './models/cell.model';
 import { SpreadTable } from './models/spread-table.models';
 import { Change, UndoRedoService } from './services/undo-redo.service';
 import { ContextMenuModel } from './models/context-menu.model';
-import { ContextMenuComponent, EditorComponent, RendererComponent } from '../public-api';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
+import { RendererComponent } from './components/renderer/renderer.component';
+import { EditorComponent } from './components/editor/editor.component';
+import { ContextMenuComponent } from './components/context-menu/context-menu.component';
 
 @Component({
   selector: 'spread-table',

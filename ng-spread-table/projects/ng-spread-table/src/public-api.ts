@@ -1,5 +1,5 @@
 /*
- * Public API Surface of spread-table
+ * Public API Surface of ngx-spread-table
  */
 
 export * from './lib/spread-table.component';

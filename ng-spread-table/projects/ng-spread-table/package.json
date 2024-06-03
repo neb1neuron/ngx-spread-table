@@ -1,6 +1,23 @@
 {
-  "name": "ng-spread-table",
-  "version": "7.0.1",
+  "name": "ngx-spread-table",
+  "version": "7.0.10",
+  "keywords": [
+    "ngspreadtable",
+    "ng-spread-table",
+    "editable",
+    "custom",
+    "editor",
+    "renderer",
+    "angular",
+    "angular2",
+    "ng",
+    "datagrid",
+    "data-grid",
+    "datatable",
+    "data-table",
+    "table",
+    "spreadsheet"
+  ],
   "peerDependencies": {
     "@angular/cdk": "^17.3.9",
     "@angular/common": "^17.3.0",
